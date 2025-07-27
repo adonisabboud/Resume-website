@@ -12,14 +12,9 @@
 }
 
 body {
-  background: radial-gradient(
-    circle at top left,
-    rgba(235, 201, 50, 0.29) 0%,
-    var(--bg) 15%
-  );
+  background: radial-gradient(circle at top left, rgba(228, 76, 10, 0.676) 0%, var(--bg) 35%);
   background-size: 200% 200%;
-  animation: pulse 15s ease-in-out infinite;
-
+  animation: pulse 7s ease-in-out infinite;
   color: var(--text);
   font-family: 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
@@ -48,6 +43,11 @@ header {
   text-align: center;
   padding: 1rem 0;
 }
+header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text) !important;
+}
 header nav {
   display: flex;
   justify-content: center;
@@ -75,21 +75,27 @@ nav a.active::after {
   transform: scaleX(1);
 }
 
-/* ── SECTION & DIVIDER ── */
+/* ── SECTION ── */
 section {
   padding: 4rem 1rem;
 }
 section h2 {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
   font-size: 2rem;
 }
-section:nth-of-type(odd) {
-  background: rgba(230,57,70,0.05);
+#projects h2 {
+  font-size: 2.25rem;
+  color: var(--text);
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
 }
-section:nth-of-type(even) {
-  background: rgba(230,57,70,0.02);
-}
+section:nth-of-type(odd) { background: rgba(230,57,70,0.05); }
+section:nth-of-type(even) { background: rgba(230,57,70,0.02); }
+
+/* ── DIVIDER ── */
 .divider {
   height: 80px;
   width: 100%;
@@ -102,15 +108,27 @@ section:nth-of-type(even) {
   background: var(--card-bg);
   color: var(--text);
   padding: 1.5rem;
-  border-radius: 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-  transition: transform 0.3s;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
   overflow: hidden;
 }
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
 }
+.card h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #ffffff;
+}
+.card .description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+/* ── SHINY “SHEEN” EFFECT ── */
 .card::before {
   content: '';
   position: absolute;
@@ -128,6 +146,66 @@ section:nth-of-type(even) {
 }
 .card:hover::before {
   transform: rotate(25deg) translateX(100%);
+}
+/* ── CENTER THE PROJECTS GRID ── */
+#projects .projects-grid {
+  display: grid;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;      /* centers the grid container */
+  padding: 0 1rem;     /* side padding on mobile */
+  /* instead of a hard‑coded 1fr or repeat(2,1fr): */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;  /* center each card in its track */
+}
+/* ── PROJECTS ── */
+.project-links {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.project-links a {
+  color: #00bfff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.project-links a:hover {
+  color: #1e90ff;
+  text-decoration: underline;
+}
+#projects .word:hover {
+  cursor: text;
+}
+
+/* Center the Projects title */
+#projects {
+  text-align: center;
+}
+
+/* ── COMMON CARD STYLES ── */
+#education .card,
+#hobbies .card,
+#contact .card {
+  max-width: 600px;
+  margin: 0 auto;
+}
+#education .card,
+#hobbies .card {
+  text-align: left;
+}
+#contact .card {
+  text-align: center;
+}
+
+/* ── HOVERS ── */
+#education .card h3:hover,
+#education .card p:hover,
+#hobbies .card h2:hover,
+#hobbies .card p:hover {
+  color: var(--accent);
+  cursor: pointer;
 }
 
 /* ── ABOUT ── */
@@ -148,46 +226,13 @@ section:nth-of-type(even) {
   max-width: 600px;
   text-align: center;
 }
-
-/* ── PROJECTS ── */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-/* ── EDUCATION ── */
-#education .card {
+/* constrain & center the About card */
+#about .card {
   max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
-}
-/* Education text hover */
-#education .card h3:hover,
-#education .card p:hover {
-  color: var(--accent);
-  cursor: pointer;
+  margin: 0 auto 2rem;  /* auto‑horiz centers, 2rem bottom gap */
+  padding: 1.5rem;       /* if you want extra padding inside the card */
 }
 
-/* ── HOBBIES ── */
-#hobbies .card {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
-}
-/* Hobbies text hover */
-#hobbies .card h2:hover,
-#hobbies .card p:hover {
-  color: var(--accent);
-  cursor: pointer;
-}
-
-/* ── CONTACT ── */
-#contact .card {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-}
 
 /* ── SKILLS ── */
 .skills-list {
@@ -265,7 +310,7 @@ section:nth-of-type(even) {
   text-align: center;
   margin: 0.5rem 0 2rem;
   font-size: 1.25rem;
-  color: rgba(255,255,255,0.8);
+  color: var(--accent);
   min-height: 1.5em;
 }
 
@@ -274,20 +319,4 @@ h1:hover,
 h2:hover,
 h3:hover {
   color: var(--accent);
-}
-
-/* ── SIMPLE RED NAME ── */
-header h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--accent);
-  background: none;
-  background-clip: unset;
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: initial;
-  animation: none;
-}
-/* In Projects, words should look like normal text, not links */
-#projects .word:hover {
-  cursor: text;    /* or “default” if you prefer */
 }
