@@ -1,0 +1,293 @@
+:root {
+  --bg:       #000000;
+  --accent:   #e63946;
+  --text:     #ffffff;
+  --card-bg:  #111111;
+}
+
+/* ── BACKGROUND PULSE & BASE STYLES ── */
+@keyframes pulse {
+  0%, 100% { background-position: top left; }
+  50%      { background-position: bottom right; }
+}
+
+body {
+  background: radial-gradient(
+    circle at top left,
+    rgba(235, 201, 50, 0.29) 0%,
+    var(--bg) 15%
+  );
+  background-size: 200% 200%;
+  animation: pulse 15s ease-in-out infinite;
+
+  color: var(--text);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── RESET ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ── LINKS ── */
+a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+a:hover {
+  color: var(--accent);
+}
+
+/* ── HEADER & NAV ── */
+header {
+  background: transparent;
+  text-align: center;
+  padding: 1rem 0;
+}
+header nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+nav a {
+  position: relative;
+  padding: 0.25rem 0;
+  transition: color 0.3s;
+}
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+nav a.active {
+  color: var(--accent);
+}
+nav a.active::after {
+  transform: scaleX(1);
+}
+
+/* ── SECTION & DIVIDER ── */
+section {
+  padding: 4rem 1rem;
+}
+section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+section:nth-of-type(odd) {
+  background: rgba(230,57,70,0.05);
+}
+section:nth-of-type(even) {
+  background: rgba(230,57,70,0.02);
+}
+.divider {
+  height: 80px;
+  width: 100%;
+  background: var(--bg);
+  clip-path: polygon(0 0, 100% 30%, 100% 100%, 0 100%);
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--card-bg);
+  color: var(--text);
+  padding: 1.5rem;
+  border-radius: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  transition: transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: -100%; left: -100%;
+  width: 200%; height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 0%,
+    rgba(255,255,255,0.2) 50%,
+    transparent 100%
+  );
+  transform: rotate(25deg) translateX(-100%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+.card:hover::before {
+  transform: rotate(25deg) translateX(100%);
+}
+
+/* ── ABOUT ── */
+#about .about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+.bio {
+  max-width: 600px;
+  text-align: center;
+}
+
+/* ── PROJECTS ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* ── EDUCATION ── */
+#education .card {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+/* Education text hover */
+#education .card h3:hover,
+#education .card p:hover {
+  color: var(--accent);
+  cursor: pointer;
+}
+
+/* ── HOBBIES ── */
+#hobbies .card {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+/* Hobbies text hover */
+#hobbies .card h2:hover,
+#hobbies .card p:hover {
+  color: var(--accent);
+  cursor: pointer;
+}
+
+/* ── CONTACT ── */
+#contact .card {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ── SKILLS ── */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* ── BADGES ── */
+.badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--text);
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: transform 0.2s;
+}
+.badge:hover {
+  transform: scale(1.05);
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.2s;
+}
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* ── BACK TO TOP ── */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  width: 3rem; height: 3rem;
+  background: var(--accent);
+  color: var(--text);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 100;
+}
+.back-to-top.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── PER‑WORD HOVER ── */
+.word {
+  display: inline-block;
+  transition: color 0.2s ease;
+}
+.word:hover {
+  color: var(--accent);
+  cursor: pointer;
+}
+
+/* ── SUBLINE ── */
+.subline {
+  text-align: center;
+  margin: 0.5rem 0 2rem;
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.8);
+  min-height: 1.5em;
+}
+
+/* ── HEADING HOVER ── */
+h1:hover,
+h2:hover,
+h3:hover {
+  color: var(--accent);
+}
+
+/* ── SIMPLE RED NAME ── */
+header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: none;
+  background-clip: unset;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: initial;
+  animation: none;
+}
+/* In Projects, words should look like normal text, not links */
+#projects .word:hover {
+  cursor: text;    /* or “default” if you prefer */
+}

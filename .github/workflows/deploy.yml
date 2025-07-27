@@ -1,0 +1,26 @@
+name: Deploy Resume Site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    environment: github-pages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './'    # your index.html lives in the repo root
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1

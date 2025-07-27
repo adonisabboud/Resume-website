@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adonis - Resume</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Inline CSS for reveal animations -->
+  <style>
+    .reveal {
+      opacity: 0.2;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1> Adonis Abboud</h1>
+    <h2 id="subline" class="subline"></h2>
+    <nav>
+      <a href="#about">About-Me</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#hobbies">Hobbies</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about" class="reveal">
+      <h2>About Me</h2>
+      <div class="about-content">
+        <img src="assets/profile.jpeg" alt="Adonis Abboud" class="profile-pic" />
+        <div class="bio">
+          <span class="word">
+            <p>Hello! I’m <strong> Adonis Abboud</strong>, a CS Graduand based in Haifa. I love building web apps
+              and exploring new tech. In my spare time I enjoy playing music on the violin and oud, in addittion to
+              contributing to open-source.</p>
+          </span>
+        </div>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+    <section id="projects" class="reveal">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <article class="card">
+          <h3>Project-PrivateTutor</h3>
+          <p class="description">A full-stack tutoring platform featuring a FastAPI backend and a Streamlit frontend,
+            designed to easily integrate future mobile apps or chatbots.<br> Private tutoring website application: Developed
+            and maintained a backend application using FastAPI to manage scheduling for students and teachers,<br> including
+            user authentication and session management. Integrated MongoDB to handle data storage. Implemented RESTful
+            API endpoints for creating, retrieving, updating, and deleting user data, enhancing the application's
+            interactivity and functionality. Troubleshot and resolved complex issues related to data formatting and API
+            integration, significantly improving system stability and performance. Collaborated with the frontend team
+            to ensure API compatibility with the user interface, streamlining the development process and enhancing user
+            experience. Employed Python and FastAPI for server-side logic, demonstrating strong coding skills and
+            understanding of web frameworks.</p>
+          <p><strong>Tech stack:</strong> Python, YAML, FastAPI, MongoDB, Streamlit, Swagger, Git.</p>
+          <div class="project-links">
+            <a href="https://github.com/adonisabboud/Project-PrivateTutor/tree/server-generated" target="_blank"
+              rel="noopener">Server Link (BackEnd) on GitHub</a>
+            <a href="https://github.com/adonisabboud/Project-PrivateTutorWebsite" target="_blank" rel="noopener">Website
+              Link (FrontEnd) on GitHub</a>
+          </div>
+        </article>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+    <section id="education" class="reveal">
+      <h2>Education</h2>
+      <div class="card">
+        <h3>B.Sc. in Computer Science</h3>
+        <p>University of Haifa, march 2020 - march 2025</p>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+    <section id="skills" class="reveal">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <span class="badge">C</span>
+        <span class="badge">C++</span>
+        <span class="badge">Python</span>
+        <span class="badge">YAML</span>
+        <span class="badge">FastAPI</span>
+        <span class="badge">MongoDB</span>
+        <span class="badge">Streamlit</span>
+        <span class="badge">Swagger</span>
+        <span class="badge">Git</span>
+        <span class="badge">HTML</span>
+        <span class="badge">CSS</span>
+        <span class="badge">JavaScript</span>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+
+    <section id="hobbies" class="reveal">
+      <h2>Hobbies</h2>
+      <div class="card hobbies-content">
+        <p>Violin/Oud playing in various concerts, music festivals,</p> 
+        <p>and church since the age of 10.</p>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+
+    <section id="contact" class="reveal">
+      <h2>Contact</h2>
+      <div class="card contact-info">
+        <p>Email: <a href="mailto:adonisabboud36@gmail.com">adonisabboud36@gmail.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/adonis-abboud-94497a180" target="_blank" rel="noopener">
+            LinkedIn Profile</a>
+        </p>
+        <p>GitHub: <a href="https://github.com/adonisabboud" target="_blank" rel="noopener">GitHub Profile Link</a></p>
+      </div>
+    </section>
+  </main>
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+  <button class="btn back-to-top" aria-label="Back to top">↑</button>
+  <!-- External JS -->
+  <script src="script.js"></script>
+</body>
+
+</html>
