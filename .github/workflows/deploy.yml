@@ -5,22 +5,30 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read        # needed to fetch your code
+  pages: write          # needed to publish
+  id-token: write       # needed to configure the pages environment
+
 jobs:
   deploy:
-    environment: github-pages
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages              # this ties into your “github-pages” environment
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout source
+        uses: actions/checkout@v4
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v3
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
-      - name: Upload site artifact
-        uses: actions/upload-pages-artifact@v1
+      - name: Upload site files
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: './'    # your index.html lives in the repo root
+          path: './'                    # your index.html is at the repo root
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        id: deployment
+        uses: actions/deploy-pages@v4
