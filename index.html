@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adonis - Resume</title>
+  <title>Adonis Abboud | Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
   <!-- Inline CSS for reveal animations -->
   <style>
@@ -26,27 +26,75 @@
     <h1> Adonis Abboud</h1>
     <h2 id="subline" class="subline"></h2>
     <nav>
-      <a href="#about">About-Me</a>
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#education">Education</a>
       <a href="#skills">Skills</a>
-      <a href="#hobbies">Hobbies</a>
+      <a href="#hobbies">Music</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <main>
+    <section id="hero" class="hero reveal">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h2 class="hero-title">Machine Learning • Music Tech • Full-Stack</h2>
+          <p class="hero-tagline">
+            I build interactive music tools and ML prototypes — from microtonal maqām exploration (Web Audio, 53-EDO)
+            to automated music transcription experiments.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#projects">View Projects</a>
+            <a class="btn" href="https://adonisabboud.github.io/maqam-builder-53edo/" target="_blank" rel="noopener">
+              Live Demo: Maqām Builder
+            </a>
+            <a class="btn" href="https://github.com/adonisabboud" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/adonis-abboud-94497a180/" target="_blank"
+              rel="noopener">LinkedIn</a>
+          </div>
+
+          <p class="muted hero-note">
+            Currently: evaluating & integrating Spotify’s <b>Basic Pitch</b> for Arabic-music transcription (AMT)
+            experiments.
+          </p>
+        </div>
+
+        <div class="hero-card card">
+          <h3>Quick Links</h3>
+          <ul class="clean-list">
+            <li><a href="https://adonisabboud.github.io/maqam-builder-53edo/" target="_blank" rel="noopener">Maqām
+                Builder (live)</a></li>
+            <li><a href="https://github.com/adonisabboud/Project-PrivateTutor/tree/server-generated" target="_blank"
+                rel="noopener">PrivateTutor Backend</a></li>
+            <li><a href="https://github.com/adonisabboud/Project-PrivateTutorWebsite" target="_blank"
+                rel="noopener">PrivateTutor Frontend</a></li>
+          </ul>
+          <p class="muted" style="margin-top:10px;">
+            Tip: best viewed on desktop for audio + keyboard controls.
+          </p>
+        </div>
+      </div>
+    </section>
+    <div class="divider"></div>
+
     <section id="about" class="reveal">
       <h2>About Me</h2>
 
       <!-- Card wrapper -->
       <div class="card">
         <div class="about-content">
-          <img src="assets/profile.jpeg" alt="Adonis Abboud" class="profile-pic" />
+          <img src="assets/image.webp" alt="Adonis Abboud" class="profile-pic" />
           <div class="bio">
-            <p>Hello! I’m <strong>Adonis Abboud</strong>, a CS Graduand based in Haifa. I love building web apps
-              and exploring new tech. In my spare time I enjoy playing music on the violin and oud, in addition to
-              contributing to open‑source.</p>
+            <p>
+              Hello! I’m <strong>Adonis Abboud</strong>, a Computer Science graduate based in Haifa.
+              I enjoy building software at the intersection of <b>music</b> and <b>machine learning</b>:
+              interactive audio tools in the browser, microtonal tuning systems, and transcription prototypes.
+              I’m comfortable moving from idea → prototype → clean demo, and I love collaborating and learning fast.
+            </p>
+
           </div>
         </div>
       </div>
@@ -76,6 +124,39 @@
               Link (FrontEnd) on GitHub</a>
           </div>
         </article>
+        <article class="card">
+          <h3>Arabic Maqām Builder (53-EDO)</h3>
+          <p class="description">
+            Interactive web app for exploring Arabic maqāmāt using a 53-tone equal temperament (Turkish comma system).
+            Implements microtonal intonation (Rāst / Bayātī / Sīkāh half-flats) and renders sound via the Web Audio API
+            with keyboard playback, drones, and transposition.
+          </p>
+          <p><strong>Tech stack:</strong> JavaScript, Web Audio API, HTML/CSS, GitHub Pages.</p>
+          <div class="project-links">
+            <a href="https://adonisabboud.github.io/maqam-builder-53edo/" target="_blank" rel="noopener">Live Demo</a>
+            <a href="https://github.com/adonisabboud/maqam-builder-53edo" target="_blank" rel="noopener">Source Code
+              (GitHub)</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Automated Music Transcription (AMT) — Arabic Music (WIP)</h3>
+          <p class="description">
+            Experimenting with audio-to-notes transcription and evaluation workflows. Currently integrating and
+            evaluating
+            Spotify’s <b>Basic Pitch</b> as a baseline model, with a long-term goal of improving alignment with Arabic
+            maqām
+            pitch structures and ornamentation.
+          </p>
+          <p><strong>Tech stack:</strong> Python, audio DSP, evaluation scripts, Basic Pitch (baseline), Git.</p>
+          <div class="project-links">
+            <a href="#" aria-disabled="true">Repo (coming soon)</a>
+          </div>
+          <p class="muted" style="margin-top:10px;">
+            Note: This project is actively under development; I’m iterating on datasets, metrics, and model outputs.
+          </p>
+        </article>
+
       </div>
     </section>
     <div class="divider"></div>
@@ -84,7 +165,11 @@
       <h2>Education</h2>
       <div class="card">
         <h3>B.Sc. in Computer Science</h3>
-        <p>University of Haifa, march 2020 - march 2025</p>
+        <p>University of Haifa,  march 2020 - march 2025</p>
+      </div>
+      <div class="card">
+        <h3>B.Sc. in Mathematics</h3>
+        <p>Open University of Israel,  April 2025 - Current Day</p>
       </div>
     </section>
     <div class="divider"></div>
@@ -110,10 +195,9 @@
 
 
     <section id="hobbies" class="reveal">
-      <h2>Hobbies</h2>
+      <h2>Music</h2>
       <div class="card hobbies-content">
-        <p>Violin/Oud playing in various concerts, music festivals,</p>
-        <p>and church since the age of 10.</p>
+        <p>Violin/Oud playing in various Concerts, Ensambles ( Currently at Al - Balad Ensamble Led By Maestro Antonio Shakour ) , music festivals ( Musica Mundi - Belgium 2014, Keshet Eilon - Throughout my whole Time learning at Rubin's Haifa Conservatory ), and Saint Luis Maronite Church since the age of 10.</p>  
       </div>
     </section>
     <div class="divider"></div>

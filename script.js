@@ -1,110 +1,151 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Typewriter effect for header
-  const header = document.querySelector('header h1');
-  const fullText = header.textContent;
-  header.textContent = '';
-  let idx = 0;
-  function typeWriter() {
-    if (idx < fullText.length) {
-      header.textContent += fullText.charAt(idx++);
-      setTimeout(typeWriter, 100);
-    }
-  }
-  typeWriter();
+document.addEventListener("DOMContentLoaded", () => {
+  // ---------------------------
+  // 1) Header typewriter (faster + mobile-friendly)
+  // ---------------------------
+  const header = document.querySelector("header h1");
+  if (header) {
+    const fullText = header.textContent.trim();
+    const prefersReducedMotion =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Smooth scroll for nav links
-  document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      document.querySelector(link.hash).scrollIntoView({ behavior: 'smooth' });
-    });
-  });
+    const isMobile = window.matchMedia && window.matchMedia("(max-width: 520px)").matches;
 
-  // Reveal-on-scroll & stagger badges
-  const reveals = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        if (entry.target.id === 'skills') {
-          const badges = entry.target.querySelectorAll('.badge');
-          badges.forEach((badge, i) => setTimeout(() => badge.classList.add('active'), i * 100));
+    // If reduced motion or small screen: show immediately
+    if (prefersReducedMotion || isMobile) {
+      header.textContent = fullText;
+    } else {
+      header.textContent = "";
+      let idx = 0;
+      const speed = 45; // faster than 100ms
+      (function typeWriter() {
+        if (idx < fullText.length) {
+          header.textContent += fullText.charAt(idx++);
+          setTimeout(typeWriter, speed);
         }
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => revealObserver.observe(el));
-
-  // Back to Top button & Progress Bar
-  const backToTop = document.querySelector('.back-to-top');
-  const prog = document.getElementById('progress-bar');
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    backToTop.classList.toggle('show', scrolled > 300);
-    if (prog) {
-      const percent = (scrolled / (document.body.scrollHeight - window.innerHeight)) * 100;
-      prog.style.width = percent + '%';
+      })();
     }
-  });
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  // Wrap text nodes in paragraphs into word spans, preserving links
-  document.querySelectorAll('p.description').forEach(p => {
-    const frag = document.createDocumentFragment();
-    p.childNodes.forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        node.textContent.split(/\s+/).filter(w => w.length).forEach((w, i, arr) => {
-          const span = document.createElement('span');
-          span.className = 'word';
-          span.textContent = w;
-          frag.appendChild(span);
-          if (i < arr.length - 1) frag.appendChild(document.createTextNode(' '));
-        });
-      } else {
-        frag.appendChild(node.cloneNode(true));
-      }
-    });
-    p.textContent = '';
-    p.appendChild(frag);
-  });
-
-  // Scroll‑spy: highlight nav links based on which section is in view
-  const sections = document.querySelectorAll('main section');
-  const scrollSpy = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const link = document.querySelector(`nav a[href="#${entry.target.id}"]`);
-      if (link) link.classList.toggle('active', entry.isIntersecting);
-    });
-  }, {
-    root: null,
-    rootMargin: '-20% 0px -80% 0px',
-    threshold: 0.6
-  });
-  sections.forEach(section => scrollSpy.observe(section));
-  // Rotating subtitle under header
-  const tags = [
-    'CS Graduate',
-    'Open‑Source Enthusiast',
-    'Lifelong Learner'
-  ];
-  let ti = 0, tj = 0, dir = 1;
-  const sub = document.getElementById('subline');
-  function typeTag() {
-    const text = tags[ti].slice(0, tj);
-    sub.textContent = text;
-    tj += dir;
-    if (tj > tags[ti].length || tj < 0) {
-      dir *= -1;
-      if (tj < 0) {
-        ti = (ti + 1) % tags.length;
-        dir = 1;
-      }
-    }
-    setTimeout(typeTag, dir > 0 ? 150 : 75);
   }
-  typeTag();
 
+  // ---------------------------
+  // 2) Smooth scroll for nav links
+  // ---------------------------
+  document.querySelectorAll('nav a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const target = document.querySelector(link.getAttribute("href"));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  // ---------------------------
+  // 3) Reveal-on-scroll
+  // ---------------------------
+  const reveals = document.querySelectorAll(".reveal");
+  const revealObserver = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("active");
+        obs.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12 }
+  );
+  reveals.forEach((el) => revealObserver.observe(el));
+
+  // ---------------------------
+  // 4) Back to Top + Progress bar
+  // ---------------------------
+  const backToTop = document.querySelector(".back-to-top");
+  const prog = document.getElementById("progress-bar");
+
+  function onScroll() {
+    const scrolled = window.scrollY;
+    if (backToTop) backToTop.classList.toggle("show", scrolled > 320);
+
+    if (prog) {
+      const docH = document.documentElement.scrollHeight;
+      const winH = window.innerHeight;
+      const percent = (scrolled / Math.max(1, docH - winH)) * 100;
+      prog.style.width = percent.toFixed(2) + "%";
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  if (backToTop) {
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // ---------------------------
+  // 5) Scroll-spy (ensure only ONE active link)
+  // ---------------------------
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+
+  function setActiveLink(id) {
+    navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${id}`));
+  }
+
+  const scrollSpy = new IntersectionObserver(
+    (entries) => {
+      // Choose the most visible intersecting section
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (visible) setActiveLink(visible.target.id);
+    },
+    {
+      root: null,
+      rootMargin: "-25% 0px -65% 0px",
+      threshold: [0.25, 0.4, 0.55, 0.7, 0.85],
+    }
+  );
+  sections.forEach((section) => scrollSpy.observe(section));
+
+  // ---------------------------
+  // ---------------------------
+  const tags = [
+    "Music + Microtonal Tuning (Maqām)",
+    "Audio ML • Transcription (AMT)",
+    "Full-Stack (FastAPI + MongoDB)",
+  ];
+
+  const sub = document.getElementById("subline");
+  if (sub) {
+    let ti = 0,
+      tj = 0,
+      dir = 1;
+
+    const prefersReducedMotion =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      sub.textContent = tags[0];
+    } else {
+      function typeTag() {
+        const text = tags[ti].slice(0, tj);
+        sub.textContent = text;
+        tj += dir;
+
+        if (tj > tags[ti].length || tj < 0) {
+          dir *= -1;
+          if (tj < 0) {
+            ti = (ti + 1) % tags.length;
+            dir = 1;
+          }
+        }
+
+        setTimeout(typeTag, dir > 0 ? 110 : 55);
+      }
+      typeTag();
+    }
+  }
 });
